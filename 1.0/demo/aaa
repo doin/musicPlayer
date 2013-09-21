@@ -1,0 +1,75 @@
+package sound_lib{
+import flash.display.*
+import flash.media.Sound
+import flash.media.SoundChannel
+import flash.media.SoundLoaderContext
+import flash.events.*
+import flash.net.URLRequest
+public class Control_panel extends MovieClip{
+    private var sound:Sound
+    private const sound_url:String="sound_data/m01.mp3"
+    private var sound_channel:SoundChannel
+    private var position:int
+    private var sound_length
+    private var is_play:Boolean
+    private var loadEnd:Boolean=false
+    public function Control_panel(){
+        addEventListener(Event.ADDED_TO_STAGE,add_to_stage)
+    }
+    private function add_to_stage(_evt:Event):void{
+        init()
+    }
+    private function init(){
+        sound_init()
+        control_init()
+    }
+    //==================sound part====================//
+    function sound_init(){
+        var buffer:SoundLoaderContext=new SoundLoaderContext(5000)
+        sound=new Sound()
+        sound.load(new URLRequest(sound_url),buffer)
+        sound_channel=sound.play()
+        sound.addEventListener(ProgressEvent.PROGRESS,sound_loading_Handler)
+        is_play=true
+        play_mc.visible=false
+    }
+    //===================control part=================//
+    function control_init(){
+        pause_mc._btn.addEventListener(MouseEvent.CLICK,is_play_Handler)
+        play_mc._btn.addEventListener(MouseEvent.CLICK,is_play_Handler)
+        addEventListener(Event.ENTER_FRAME,progress_Handler)
+    }
+    private function is_play_Handler(_evt:MouseEvent):void{
+        if(is_play){
+            is_play=false
+            position=sound_channel.position
+            sound_channel.stop()
+            play_mc.visible=true
+            pause_mc.visible=false
+        }else{
+            is_play=true
+            sound_channel=sound.play(position)
+            play_mc.visible=false
+            pause_mc.visible=true
+        }
+    }
+    private function sound_loading_Handler(_evt:ProgressEvent):void{
+        var loaded_per=Math.ceil(100*_evt.bytesLoaded/_evt.bytesTotal)/100
+        if(loaded_per>=100) loadEnd=true
+        scroll_bar.loading_bar.scaleX=loaded_per
+    }
+    private function progress_Handler(_evt:Event):void{
+        var loaded=sound.bytesLoaded
+        var total=sound.bytesTotal
+        sound_length=sound.length
+        if(total>0){
+            var loaded_per=loaded/total
+            if(loaded_per>=1) loadEnd=true
+            scroll_bar.loading_bar.scaleX=loaded_per
+            sound_length=sound_length/loaded_per
+            position=sound_channel.position
+            var played_per=position/sound_length
+            scroll_bar.dragger.x=(scroll_bar.scroll_bg.width-scroll_bar.dragger.width)*played_per
+        }
+    }
+}
