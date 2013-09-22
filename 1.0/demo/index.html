@@ -6,8 +6,34 @@
     <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
 </head>
+<style type="text/css">
+    #J_playDesc{
+        width: 96px;
+        height: 74px;
+        overflow: hidden;
+        display: block;
+
+    }
+    .play{
+
+        background: url(http://gtms01.alicdn.com/tps/i1/T1TKCZFbVXXXXhFNTm-192-74.png)0 0 no-repeat;
+    }
+    .playpause{
+        background: url(http://gtms01.alicdn.com/tps/i1/T1TKCZFbVXXXXhFNTm-192-74.png) -96px 0 no-repeat;
+    }
+    a,img{
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+</style>
+
 <body>
-<h2>musicPlayer的demo</h2>
+<h2>demo1 - 简单的音乐播放功能</h2>
+
+<a href="javascript:;" id="J_playDesc" title="" class="play playpause">
+
+</a>
 
 <script>
     var S = KISSY;
@@ -26,8 +52,23 @@
     }
 
     S.use('gallery/musicPlayer/1.0/index', function (S, MusicPlayer) {
-          new MusicPlayer();
-    })
+          var musicPlayer =  new MusicPlayer({
+              auto:'true',
+              musicList:[{"name":"小鸟1", "path":"./3.mp3"},{"name":"小鸟2", "path":"./2.mp3"}]
+          });
+
+        S.one('#J_playDesc').on('click',function(e){
+            e.halt();
+            var _self = S.one(e.currentTarget);
+            if( _self.hasClass('playpause')){
+                _self.removeClass('playpause');
+                musicPlayer.pause();
+            }else{
+                _self.addClass('playpause');
+                musicPlayer.play();
+            }
+        })
+    });
 </script>
 </body>
 </html>

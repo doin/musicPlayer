@@ -14,11 +14,14 @@ KISSY.add(function (S, Node,Base,SWF) {
     var swf;
 
     function MusicPlayer(comConfig) {
+        _this = this;
+        this._init(comConfig);
+
         var self = this;
         //调用父类构造函数
         MusicPlayer.superclass.constructor.call(self, comConfig);
     }
-    S.log("5")
+
     S.namespace('MusicPlayer');
     S.mix(S.MusicPlayer, {
         error : function(ev) {
@@ -41,7 +44,7 @@ KISSY.add(function (S, Node,Base,SWF) {
         npause : null,
         npre : null,
         nnext : null,
-        musicList : Array,
+        musicList : null,
         mode : "order",
         auto : false,
         volume : 0.25
@@ -53,10 +56,10 @@ KISSY.add(function (S, Node,Base,SWF) {
              */
             _bindEvent : function() {
                 S.all(defaultConfig.nstop) && S.all(defaultConfig.nstop).on('click', function(ev) {
-                    // swf.callSWF('onStop');
+                     swf.callSWF('onStop');
                 });
                 S.all(defaultConfig.nplay) && S.all(defaultConfig.nplay).on('click', function(ev) {
-                    // swf.callSWF('onPlay');
+                     swf.callSWF('onPlay');
                 });
                 S.all(defaultConfig.npause) && S.all(defaultConfig.npause).on('click', function(ev) {
                     swf.callSWF('onPause');
@@ -74,7 +77,7 @@ KISSY.add(function (S, Node,Base,SWF) {
             _createSWF : function() {
                 swf = new SWF({
                     //http://10.5.176.20:8080/gitlab/1.0
-                    src:'./MP3PlayerCom.swf',
+                    src:'http://10.5.176.32:8080/gitlab/musicPlayer/1.0/swf/MP3PlayerCom.swf',
                     attrs:{
                         width:1,
                         height:1
@@ -116,11 +119,10 @@ KISSY.add(function (S, Node,Base,SWF) {
              * @param {Object} 配置参数
              * @return {Boolean}
              */
-            init : function(config) {
+            _init : function(config) {
                 S.mix(defaultConfig, config);
                 //设置播放模式属性
                 //defaultConfig.mode && this.set("mode", defaultConfig.mode);
-                _this = this;
                 this._createSWF();
                 this._bindEvent();
 
