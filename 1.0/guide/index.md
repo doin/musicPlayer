@@ -4,17 +4,11 @@ musicPlayer是基于Flash开发的MP3音乐播放组件, 3分钟即可完成简�
 
 * 版本：1.0
 * 作者：doin
-
-## demo演示
-
-* [简单的控制音乐播放](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo1.html)
-* [MP3列表模式实例](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo2.html)
-* [完整MP3播放器-演示所有功能](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo3.html)
+* demo : [https://github.com/doin/musicPlayer](https://github.com/doin/musicPlayer)
 
 ## 1分钟实例
 
-#### 1分钟实现背景音乐循环播放
-
+1分钟实现背景音乐循环播放
 引入KISSY1.3,复制嵌入代码,修改歌曲路径即可
 ```javascript
     S.use('gallery/musicPlayer/1.0/index', function (S, MusicPlayer) {
@@ -54,7 +48,7 @@ progress     |    int    |   只写      |    0-100之间   |   设置当前播�
 
 ## 方法说明
 
-     方法名     |     参数类型  |   参数说明    |     返回值   |    描述
+方法名     |     参数类型  |   参数说明    |     返回值   |    描述
 ------------   | ------------ | ------------ | ------------- | -------------
 setList     |   Object    |  格式要求:[{"name":"歌名", "path":"./歌曲地址.mp3"}]  |    无   | 设置歌曲列表,会默认播放新列表中的第一首
 play     |      int    |   大于等于0, 不写参数默认当前歌曲  |    无   |  播放歌曲
@@ -120,6 +114,13 @@ progress     |   获取当前歌曲播放进度,值为0-100
         S.log([ev.curtime, ev.counttime, ev.progress]);
     }
 ```
+
+## demo演示
+
+* [简单的控制音乐播放](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo1.html)
+* [MP3列表模式实例](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo2.html)
+* [完整MP3播放器-演示所有功能](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo3.html)
+
 ##Q&A
 
 ####处理跨域问题？
