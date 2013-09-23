@@ -47,7 +47,9 @@ KISSY.add(function (S, Node,Base,SWF) {
         musicList : null,
         mode : "order",
         auto : false,
-        volume : 0.25
+        volume : 0.25,
+        buffer : 1000,
+        contain : "body"
     };
 
     S.extend(MusicPlayer, Base, {
@@ -77,7 +79,7 @@ KISSY.add(function (S, Node,Base,SWF) {
             _createSWF : function() {
                 swf = new SWF({
                     //http://10.5.176.20:8080/gitlab/1.0
-                    src:'http://10.5.176.32:8080/gitlab/musicPlayer/1.0/swf/MP3PlayerCom.swf',
+                    src:'http://gtms03.alicdn.com/tps/i3/T1JY11FgJgXXXtxVjX.swf',
                     attrs:{
                         width:1,
                         height:1
@@ -87,12 +89,13 @@ KISSY.add(function (S, Node,Base,SWF) {
                             mp3list : defaultConfig.musicList,
                             auto : defaultConfig.auto,
                             mode : defaultConfig.mode,
-                            volume : defaultConfig.volume
+                            volume : defaultConfig.volume,
+                            buffer : defaultConfig.buffer
                         },
                         allowscriptaccess : 'always',
                         quality : 'low'
                     },
-                    render:'body'
+                    render:defaultConfig.contain
                 });
                 var _id = setInterval(function(){
                     switch (swf.get('status')) {
@@ -121,8 +124,6 @@ KISSY.add(function (S, Node,Base,SWF) {
              */
             _init : function(config) {
                 S.mix(defaultConfig, config);
-                //设置播放模式属性
-                //defaultConfig.mode && this.set("mode", defaultConfig.mode);
                 this._createSWF();
                 this._bindEvent();
 
@@ -164,7 +165,7 @@ KISSY.add(function (S, Node,Base,SWF) {
              * 设置列表 参考 [{name:'name', path:'path'}]
              */
             setList : function(obj) {
-                if(!obj) obj = {};
+                if(obj == null) obj = {};
                 swf.callSWF('setMP3List', [obj]);
             }
         },
@@ -180,7 +181,7 @@ KISSY.add(function (S, Node,Base,SWF) {
                 },
                 //设置播放缓冲区 默认1秒
                 buffer : {
-                    value : 1000,
+                    value : defaultConfig.buffer,
                     setter : function(v){
                         swf.callSWF('setBuffer',[v]);
                         return v;
