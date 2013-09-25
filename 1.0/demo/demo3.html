@@ -163,7 +163,7 @@
         });
         musicPlayer.on("progress", function(ev) {
             S.one(".d2_time").text(ev.curtime + "/" + ev.counttime);
-            S.one(".d2_load").css("width", ev.progress/100*300);
+            S.one(".d2_load").css("width", ev.progress/100*350);
         });
         S.one(".playgoto_btn").on('click', function() {
             musicPlayer.play(2);
