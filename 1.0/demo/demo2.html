@@ -32,6 +32,7 @@
             height: 32px;
             background-color: #2F3439;
             margin-bottom: 3px;
+		    cursor: pointer;
         }
         #demo2 .d2_stop {
             float: left;
@@ -39,6 +40,8 @@
         #demo2 .sound_name {
             color: #eaeaea;
             display: inline-block;
+			*diaplay: inline;
+			*zoom:1;
             margin-left: 50px;
             height: 30px;
             line-height: 30px;
@@ -47,6 +50,9 @@
         }
         #demo2 .contorl {
             position: relative;
+        }
+		#demo2 .contorls {
+            margin-top: -19px \9;
         }
         #demo2 .d2_progress {
             width: 300px;
@@ -72,7 +78,7 @@
 <h1>MP3列表模式实例</h1>
 <ul class="demo2" id="demo2">
     <li class="cur">
-        <div>
+        <div class="contorls">
             <div class="contorl">
                 <a class="d2_play" herf="javascript:;">播放</a>
                 <a class="d2_stop" herf="javascript:;">停止</a>
@@ -85,7 +91,7 @@
         </div>
     </li>
     <li>
-        <div>
+        <div class="contorls">
             <div class="contorl">
                 <a class="d2_play" herf="javascript:;">播放</a>
                 <a class="d2_stop" herf="javascript:;">停止</a>
@@ -98,7 +104,7 @@
         </div>
     </li>
     <li>
-        <div>
+        <div class="contorls">
             <div class="contorl">
                 <a class="d2_play" herf="javascript:;">播放</a>
                 <a class="d2_stop" herf="javascript:;">停止</a>
@@ -111,7 +117,7 @@
         </div>
     </li>
     <li>
-        <div>
+        <div class="contorls">
             <div class="contorl">
                 <a class="d2_play" herf="javascript:;">播放</a>
                 <a class="d2_stop" herf="javascript:;">停止</a>

@@ -48,8 +48,7 @@ KISSY.add(function (S, Node,Base,SWF) {
         mode : "order",
         auto : false,
         volume : 0.25,
-        buffer : 1000,
-        contain : "body"
+        buffer : 1000
     };
 
     S.extend(MusicPlayer, Base, {
@@ -78,8 +77,7 @@ KISSY.add(function (S, Node,Base,SWF) {
              */
             _createSWF : function() {
                 swf = new SWF({
-                    //http://10.5.176.20:8080/gitlab/1.0
-                    src:'http://gtms03.alicdn.com/tps/i3/T1Qem6FatXXXXtxVjX.swf',
+                    src:'http://gtms04.alicdn.com/tps/i4/T1b9m8FmdaXXXtxVjX.swf',
                     attrs:{
                         width:1,
                         height:1
@@ -95,12 +93,13 @@ KISSY.add(function (S, Node,Base,SWF) {
                         allowscriptaccess : 'always',
                         quality : 'low'
                     },
-                    render:defaultConfig.contain
+                    render:'#ks-musicplayer'
                 });
                 var _id = setInterval(function(){
                     switch (swf.get('status')) {
                         case SWF.Status.SUCCESS :
                             _this.fire("status", {"status":"render", "swfid":swf.get('el').id});
+							
                             setTimeout(function(){
                                 swf.callSWF('setSWFID', [swf.get('el').id]);},100);
                             clearInterval(_id);
@@ -117,6 +116,13 @@ KISSY.add(function (S, Node,Base,SWF) {
                     }
                 },10)
             },
+			/**
+             * 创建包裹SWF的DIV
+             */
+			_createDIV : function() {
+				var _tlp = '<div id="ks-musicplayer" style="position:absolute;left: -9999px; top: -9999px; width:1px; height:1px"></div>';
+				S.one('body').append(_tlp);
+			},
             /**
              * 初始化入口
              * @param {Object} 配置参数
@@ -124,6 +130,7 @@ KISSY.add(function (S, Node,Base,SWF) {
              */
             _init : function(config) {
                 S.mix(defaultConfig, config);
+				this._createDIV();
                 this._createSWF();
                 this._bindEvent();
 
