@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="gbk"/>
+    <title>musicPlayer的demo</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+    <meta name="viewport" content="width=device-width">
+    <style type="text/css">
+        body {
+            background-color: #2B2B2B;
+            color: #F0F0F0;
+            font-family: '微软雅黑';
+            padding: 0 50px;
+        }
+        #control div {
+            height: 30px;
+            background-color: #6A6A6A;
+            margin: 5px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            display : inline-block;
+            *display : inlie;
+            *zoom : 1;
+            padding: 0 5px;
+        }
+        #playlist ul {
+            padding: 0;
+        }
+        .playlist li{
+            padding-left: 20px;
+            font: 14px/1.5 tahoma,arial,\5b8b\4f53;;
+            width: 200px;
+            height: 30px;
+            overflow: hidden;
+            line-height: 30px;
+            background-color: #2F3439;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+        .playlist .cur{
+            background-color: #369D8A;
+        }
+        h3 {
+            padding-left: 40px;
+        }
+        #control {
+            /*width: 300px;*/
+            height: auto;
+            background-color: #2B2B2B;
+        }
+        .load1 .d2_progress {
+            width: 350px;
+            height: 2px;
+            background-color: cornflowerblue;
+            /*position: relative;*/
+        }
+        .load1 .d2_load {
+            background-color: #fafafa;
+            width: 100px;
+            height: 2px;
+        }
+        .load1 .d2_time {
+            /*background-color: #ffc190;*/
+            height: 40;
+            display: inline-block;
+            text-align: right;
+        }
+        .load1 {
+            width: 400px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+<h1>完整MP3播放器-演示所有功能</h1>
+<h3>播放列表</h3>
+<ul class="playlist" id="playlist">
+    <li class="cur">青春 (Live)</li>
+    <li>北京北京 (Live)</li>
+    <li>我的心里只有你没有他</li>
+    <li>十年 - 陈奕迅</li>
+</ul>
+<div class="load1">
+    <div class="d2_progress">
+        <div class="d2_load"></div>
+    </div>
+    <div class="d2_time">00:00/00:00</div>
+</div>
+
+<div id="control">
+<div class="play_btn">播放</div>
+<div class="stop_btn">停止</div>
+<div class="pause_btn">暂停</div>
+<div class="pre_btn">上一首</div>
+<div class="next_btn">下一首</div>
+<div class="playgoto_btn">跳到第3首</div> </br>
+<div class="order_btn">顺序播放</div>
+<div class="random_btn">随机播放</div>
+<div class="single_btn">单曲播放</div> </br>
+<div class="setlist_btn" style="display:none">设置列表</div>
+<div>声音:0-1</div>
+<select id="volumeselect">
+    <option></option>
+    <option>0.2</option>
+    <option>0.6</option>
+    <option>1</option>
+</select>
+<div>拖拽进度:0-100</div>
+<select id="progressselect">
+    <option></option>
+    <option>10</option>
+    <option>50</option>
+    <option>90</option>
+</select>
+</div>
+
+
+<script>
+    var S = KISSY;
+    if (S.Config.debug) {
+        var srcPath = "../../../";
+        S.config({
+            packages:[
+                {
+                    name:"gallery",
+                    path:srcPath,
+                    charset:"utf-8",
+                    ignorePackageNameInUri:true
+                }
+            ]
+        });
+    }
+
+    S.use('gallery/musicPlayer/2.0/index', function (S, MusicPlayer) {
+        var musicPlayer = new MusicPlayer({
+            nplay:'.play_btn',
+            nstop:'.stop_btn',
+            npause:'.pause_btn',
+            nnext:'.next_btn',
+            npre:'.pre_btn',
+            mode:'random',
+            auto:'true',
+            //type:'flash',
+            volume:0.25,
+            musicList:[{"name":"青春 (Live)", "path":"http://m1.file.xiami.com/368/1269130368/1370352899/1771923886_10198586_l.mp3"},
+                {"name":"北京北京 (Live)", "path":"http://m1.file.xiami.com/368/1269130368/1973540058/1772013035_10411522_l.mp3"},
+                {"name":"我的心里只有你没有他", "path":"http://m1.file.xiami.com/1/561/1561/8655/107505_224835_l.mp3"},
+                {"name":"十年 - 陈奕迅", "path":"http://m1.file.xiami.com/135/135/32694/389728_4206492_l.mp3"}]
+        });
+
+        musicPlayer.on("error", function(ev) {
+            S.log(['error',ev.msg]);
+        });
+        musicPlayer.on("status", function(ev) {
+            S.log(['status2', ev.status, ev.index, ev]);
+            switch(ev.status) {
+                case "play":
+                    if(S.all("#playlist li").hasClass('cur')) {
+                        S.all("#playlist li").removeClass('cur');
+                    }
+                    S.all("#playlist li").item(ev.index).addClass('cur');
+                    break;
+            }
+        });
+        musicPlayer.on("progress", function(ev) {
+            S.log(['status2', ev.curtime, ev.counttime, ev.progress, ev.load]);
+            S.one(".d2_time").text(ev.curtime + "/" + ev.counttime);
+            S.one(".d2_load").css("width", ev.progress/100*350);
+        });
+        S.one(".playgoto_btn").on('click', function() {
+            musicPlayer.play(2);
+        });
+        S.one(".random_btn").on('click', function() {
+            musicPlayer.set('mode', 'random');
+        });
+        S.one(".order_btn").on('click', function() {
+            musicPlayer.set('mode', 'order');
+        });
+        S.one(".single_btn").on('click', function() {
+            musicPlayer.set('mode', 'single');
+        });
+        S.one(".setlist_btn").on('click', function() {
+            musicPlayer.setlist([{"aaa":"bb"}]);
+            //todo
+        });
+        S.one("#volumeselect").on('change', function(ev) {
+            var _val = S.one(ev.target).val();
+            musicPlayer.set('volume', _val);
+        });
+        S.one("#progressselect").on('change', function(ev) {
+            var _val = S.one(ev.target).val();
+            musicPlayer.set('progress', _val);
+        });
+
+        S.all("#playlist li").on('click', function(ev) {
+            if(S.all("#playlist li").hasClass('cur')) {
+                S.all("#playlist li").removeClass('cur');
+            }
+            S.one(ev.target).addClass('cur');
+            var _index = S.one(ev.target).index();
+            musicPlayer.play(_index);
+        });
+    });
+
+</script>
+</body>
+</html>

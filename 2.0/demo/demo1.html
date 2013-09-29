@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>musicPlayer的demo</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+    <meta name="viewport" content="width=device-width">
+</head>
+<style type="text/css">
+    body {
+        background-color: #2B2B2B;
+        color: #F0F0F0;
+        font-family: '微软雅黑';
+        padding: 0 50px;
+    }
+    #J_playDesc{
+        width: 96px;
+        height: 74px;
+        overflow: hidden;
+        display: block;
+
+    }
+    .play{
+
+        background: url(http://gtms01.alicdn.com/tps/i1/T1TKCZFbVXXXXhFNTm-192-74.png)0 0 no-repeat;
+    }
+    .playpause{
+        background: url(http://gtms01.alicdn.com/tps/i1/T1TKCZFbVXXXXhFNTm-192-74.png) -96px 0 no-repeat;
+    }
+    a,img{
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+</style>
+
+<body>
+
+<h1>简单的音乐播放功能</h1>
+
+<a href="javascript:;" id="J_playDesc" title="" class="play playpause">
+
+</a>
+
+<script>
+    var S = KISSY;
+    if (S.Config.debug) {
+        var srcPath = "../../../";
+        S.config({
+            packages:[
+                {
+                    name:"gallery",
+                    path:srcPath,
+                    charset:"utf-8",
+                    ignorePackageNameInUri:true
+                }
+            ]
+        });
+    }
+
+    S.use('gallery/musicPlayer/2.0/index', function (S, MusicPlayer) {
+          var musicPlayer =  new MusicPlayer({
+              auto:'true',
+              volume:1,
+              musicList:[{"name":"青春 (Live)", "path":"http://m1.file.xiami.com/368/1269130368/1370352899/1771923886_10198586_l.mp3"},
+                  {"name":"北京北京 (Live)", "path":"http://m1.file.xiami.com/368/1269130368/1973540058/1772013035_10411522_l.mp3"}]
+          });
+
+        musicPlayer.on("progress", function(ev) {
+            S.log([ev.curtime, ev.counttime, musicPlayer.get('volume')]);
+        });
+
+        musicPlayer.on("status", function(ev) {
+            S.log(['status2', ev.swfid, ev.status, ev]);
+        });
+
+        S.one('#J_playDesc').on('click',function(e){
+            e.halt();
+            var _self = S.one(e.currentTarget);
+            if( _self.hasClass('playpause')){
+                _self.removeClass('playpause');
+                musicPlayer.pause();
+            }else{
+                _self.addClass('playpause');
+                musicPlayer.play();
+            }
+        })
+    });
+</script>
+</body>
+</html>

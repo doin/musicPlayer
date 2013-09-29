@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="gbk"/>
+    <title>musicPlayer的demo</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            background-color: #2B2B2B;
+            color: #F0F0F0;
+            font-family: '微软雅黑';
+            padding: 0 50px;
+        }
+        #demo2 a {
+            color: #F0F0F0;
+            height:30px;
+            background-color: #6A6A6A;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            display : inline-block;
+            *display : inlie;
+            *zoom : 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0 5px;
+        }
+        #demo2 li {
+            width: 300px;
+            height: 32px;
+            background-color: #2F3439;
+            margin-bottom: 3px;
+		    cursor: pointer;
+        }
+        #demo2 .d2_stop {
+            float: left;
+        }
+        #demo2 .sound_name {
+            color: #eaeaea;
+            display: inline-block;
+			*diaplay: inline;
+			*zoom:1;
+            margin-left: 50px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            width: 174px;
+        }
+        #demo2 .contorl {
+            position: relative;
+        }
+		#demo2 .contorls {
+            margin-top: -19px \9;
+        }
+        #demo2 .d2_progress {
+            width: 300px;
+            height: 2px;
+            background-color: cornflowerblue;
+        }
+        #demo2 .d2_load {
+            background-color: #fafafa;
+            width: 0;
+            height: 2px;
+        }
+        #demo2 .d2_time {
+            /*background-color: #ffc190;*/
+            height: 40;
+            display: inline-block;
+            text-align: right;
+        }
+        #demo2 .cur {
+            background-color: #43484D;
+        }
+    </style>
+</head>
+<h1>MP3列表模式实例</h1>
+<ul class="demo2" id="demo2">
+    <li class="cur">
+        <div class="contorls">
+            <div class="contorl">
+                <a class="d2_play" herf="javascript:;">播放</a>
+                <a class="d2_stop" herf="javascript:;">停止</a>
+            </div>
+            <div class="sound_name">青春 (Live)</div>
+            <div class="d2_time">00:00/00:00</div>
+        </div>
+        <div class="d2_progress">
+            <div class="d2_load"></div>
+        </div>
+    </li>
+    <li>
+        <div class="contorls">
+            <div class="contorl">
+                <a class="d2_play" herf="javascript:;">播放</a>
+                <a class="d2_stop" herf="javascript:;">停止</a>
+            </div>
+            <div class="sound_name">北京北京 (Live)</div>
+            <div class="d2_time">00:00/00:00</div>
+        </div>
+        <div class="d2_progress">
+            <div class="d2_load"></div>
+        </div>
+    </li>
+    <li>
+        <div class="contorls">
+            <div class="contorl">
+                <a class="d2_play" herf="javascript:;">播放</a>
+                <a class="d2_stop" herf="javascript:;">停止</a>
+            </div>
+            <div class="sound_name">我的心里只有你没有他</div>
+            <div class="d2_time">00:00/00:00</div>
+        </div>
+        <div class="d2_progress">
+            <div class="d2_load"></div>
+        </div>
+    </li>
+    <li>
+        <div class="contorls">
+            <div class="contorl">
+                <a class="d2_play" herf="javascript:;">播放</a>
+                <a class="d2_stop" herf="javascript:;">停止</a>
+            </div>
+            <div class="sound_name">十年 - 陈奕迅</div>
+            <div class="d2_time">00:00/00:00</div>
+        </div>
+        <div class="d2_progress">
+            <div class="d2_load"></div>
+        </div>
+    </li>
+</ul>
+<script type="text/javascript">
+    var S = KISSY;
+    if (S.Config.debug) {
+        var srcPath = "../../../";
+        S.config({
+            packages:[
+                {
+                    name:"gallery",
+                    path:srcPath,
+                    charset:"utf-8",
+                    ignorePackageNameInUri:true
+                }
+            ]
+        });
+    }
+
+    S.use('gallery/musicPlayer/2.0/index', function (S, MusicPlayer) {
+        var musicPlayer = new MusicPlayer({
+            auto:'true',
+            volume:0.2,
+            musicList:[{"name":"青春 (Live)", "path":"http://m1.file.xiami.com/368/1269130368/1370352899/1771923886_10198586_l.mp3"},
+                {"name":"北京北京 (Live)", "path":"http://m1.file.xiami.com/368/1269130368/1973540058/1772013035_10411522_l.mp3"},
+                {"name":"我的心里只有你没有他", "path":"http://m1.file.xiami.com/1/561/1561/8655/107505_224835_l.mp3"},
+                {"name":"十年 - 陈奕迅", "path":"http://m1.file.xiami.com/135/135/32694/389728_4206492_l.mp3"}]
+        });
+
+        musicPlayer.on("error", function(ev) {
+            S.log(['error',ev.msg]);
+        });
+        musicPlayer.on("status", function(ev) {
+            S.log(['status2', ev.swfid, ev.status, ev.adfasdf, ev.index, ev]);
+            switch(ev.status) {
+                case "play":
+                    S.all("#demo2 .d2_stop").hide();
+                    S.all("#demo2 .d2_stop").item(ev.index).show();
+                    S.all("#demo2 li").removeClass("cur");
+                    S.all("#demo2 li").item(ev.index).addClass("cur");
+                    break;
+                case "stop":
+                    S.all("#demo2 li").item(ev.index).removeClass("cur");
+                    S.all("#demo2 li").item(ev.index).one(".d2_stop").hide();
+                    break;
+                case "render":
+                    break;
+            }
+        });
+        musicPlayer.on("progress", function(ev) {
+            S.all("#demo2 li").item(ev.index).one(".d2_time").text(ev.curtime + "/" + ev.counttime);
+            S.all("#demo2 li").item(ev.index).one(".d2_load").css("width", ev.progress/100*300);
+        });
+
+        S.all("#demo2 li").on('click', function(ev) {
+            if(!S.one(ev.currentTarget).hasClass("cur")) {
+                var _index = S.one(ev.currentTarget).index();
+                musicPlayer.play(_index);
+            }
+            else {
+                musicPlayer.stop();
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

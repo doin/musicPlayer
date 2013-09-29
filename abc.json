@@ -1,9 +1,9 @@
 {
     "name": "musicPlayer",
-    "version": "1.0",
-    "desc": "MP3音乐播放器组件",
+    "version": "2.0",
+    "desc": "MP3音乐播放器组件(HTML5+FLASH)",
     "cover": "http://gtms02.alicdn.com/tps/i2/T1VDe4FhFXXXcoPeYv-150-150.png",
-    "tag":"1.0",
+    "tag":"2.0",
     "author": {
         "name": "韩升",
         "email": "hansheng.sl@taobao.com",
