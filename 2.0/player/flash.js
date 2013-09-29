@@ -12,7 +12,7 @@ KISSY.add(function (S, Node, SWF) {
     function setObj() {
         _obj = {
             /**
-             * ÊÂ¼ş°ó¶¨
+             * äº‹ä»¶ç»‘å®š
              */
             _bindEvent : function() {
                 S.all(defaultConfig.nstop) && S.all(defaultConfig.nstop).on('click', function(ev) {
@@ -32,11 +32,11 @@ KISSY.add(function (S, Node, SWF) {
                 });
             },
             /**
-             * ´´½¨SWF×é¼ş
+             * åˆ›å»ºSWFç»„ä»¶
              */
             _createSWF : function() {
                 swf = new SWF({
-                    src:'http://gtms04.alicdn.com/tps/i4/T1b9m8FmdaXXXtxVjX.swf',
+                    src:'http://gtms02.alicdn.com/tps/i2/T1L9YeFe8bXXXtxVjX.swf',
                     attrs:{
                         width:1,
                         height:1
@@ -75,15 +75,15 @@ KISSY.add(function (S, Node, SWF) {
                 },10)
             },
             /**
-             * ´´½¨°ü¹üSWFµÄDIV
+             * åˆ›å»ºåŒ…è£¹SWFçš„DIV
              */
             _createDIV : function() {
                 var _tlp = '<div id="ks-musicplayer" style="position:absolute;left: -9999px; top: -9999px; width:1px; height:1px"></div>';
                 S.one('body').append(_tlp);
             },
             /**
-             * ³õÊ¼»¯Èë¿Ú
-             * @param {Object} ÅäÖÃ²ÎÊı
+             * åˆå§‹åŒ–å…¥å£
+             * @param {Object} é…ç½®å‚æ•°
              * @return {Boolean}
              */
             _init : function(config) {
@@ -96,7 +96,7 @@ KISSY.add(function (S, Node, SWF) {
                 this._setfire();
             },
             /**
-             * ÕìÌıÊÂ¼ş°ó¶¨
+             * ä¾¦å¬äº‹ä»¶ç»‘å®š
              */
             _setfire : function() {
                 S.namespace('MusicPlayer');
@@ -113,8 +113,8 @@ KISSY.add(function (S, Node, SWF) {
                 });
             },
             /**
-             * ²¥·Å
-             * @param {int} ²¥·ÅË÷ÒıºÅ 0-(len-1)  Ä¬ÈÏ µ±Ç°
+             * æ’­æ”¾
+             * @param {int} æ’­æ”¾ç´¢å¼•å· 0-(len-1)  é»˜è®¤ å½“å‰
              * @return {Boolean}
              */
             play : function(index) {
@@ -122,31 +122,31 @@ KISSY.add(function (S, Node, SWF) {
                 swf.callSWF('onPlay', [index]);
             },
             /**
-             * Í£Ö¹
+             * åœæ­¢
              */
             stop : function() {
                 swf.callSWF('onStop');
             },
             /**
-             * ÔİÍ£
+             * æš‚åœ
              */
             pause : function() {
                 swf.callSWF('onPause');
             },
             /**
-             * ÉÏÒ»Ê×
+             * ä¸Šä¸€é¦–
              */
             pre : function() {
                 swf.callSWF('onPre');
             },
             /**
-             * ÏÂÒ»Ê×
+             * ä¸‹ä¸€é¦–
              */
             next : function() {
                 swf.callSWF('onNext');
             },
             /**
-             * ÉèÖÃÁĞ±í ²Î¿¼ [{name:'name', path:'path'}]
+             * è®¾ç½®åˆ—è¡¨ å‚è€ƒ [{name:'name', path:'path'}]
              */
             setList : function(obj) {
                 if(obj == null) obj = {};

@@ -13,12 +13,19 @@ KISSY.add(function (S, Node,Base,AUDIO,FLASH) {
      */
     function MusicPlayer(comConfig) {
         _this = this;
-        if(this._isSupportAudio()) {
-            S.mix(this, AUDIO.init(defaultConfig));
-        }
-        else {
-            S.mix(this, FLASH.init(defaultConfig));
-        }
+
+        var _isSupportAudio = AUDIO.isSupportAudio();
+       switch (comConfig.type) {
+           case "html5":
+               S.mix(this, AUDIO.init(defaultConfig));
+               break;
+           case "flash":
+               S.mix(this, FLASH.init(defaultConfig));
+               break;
+           default:
+               _isSupportAudio ? S.mix(this, AUDIO.init(defaultConfig)) : S.mix(this, FLASH.init(defaultConfig));
+       }
+
         this._init(comConfig);
 
         var self = this;
@@ -40,7 +47,8 @@ KISSY.add(function (S, Node,Base,AUDIO,FLASH) {
         mode : "order",
         auto : false,
         volume : 0.25,
-        buffer : 1000
+        buffer : 1000,
+        type : 'auto' // 'flash' 'html5'
     };
 
     /**
@@ -59,11 +67,7 @@ KISSY.add(function (S, Node,Base,AUDIO,FLASH) {
         _setMode : function(v){},               //接口 设置属性 播放模式
         _setBuffer : function(v){},             //接口 设置属性 缓存时间
         _setVolume : function(v){},             //接口 设置属性 播放音量
-        _setProgress : function(v){},            //接口 设置属性 播放进度
-        _isSupportAudio : function() {
-            var _isSupport = !!(document.createElement('video').canPlayType);
-            return _isSupport;
-        }
+        _setProgress : function(v){}            //接口 设置属性 播放进度
     };
 
     /**

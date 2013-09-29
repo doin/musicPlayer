@@ -25,7 +25,7 @@ KISSY.add(function (S, Node) {
     function setObj() {
         _obj = {
             /**
-             * ÊÂ¼þ°ó¶¨
+             * äº‹ä»¶ç»‘å®š
              */
             _bindEvent : function() {
                 S.all(defaultConfig.nstop) && S.all(defaultConfig.nstop).on('click', function(ev) {
@@ -45,25 +45,22 @@ KISSY.add(function (S, Node) {
                 });
             },
             /**
-             * ´´½¨SWF×é¼þ
+             * åˆ›å»ºSWFç»„ä»¶
              */
             _createAudio: function() {
                 audio = document.createElement("audio");
-                audio.contentType = "Content-Type:application/octet-stream"
-                audio.addEventListener("timeupdate", this._progress_handle, true);
-                audio.addEventListener("ended", this._ended_handle, true);
-                audio.addEventListener("loadedmetadata", function(_event) {
-                  // alert(audio.duration);
-                });
             },
             /**
-             * ²¥·Å½ø¶È
+             * æ’­æ”¾è¿›åº¦
              */
             _progress_handle: function() {
                 var _curTime = formatTime(audio.currentTime);
                 var _countTime = formatTime(audio.duration);
-                var _progress = Math.floor(audio.currentTime/audio.duration*100);
-                if((_curTime != curTime || _progress != curProgress) && _countTime != "NaN:NaN") {
+                //var _progress = Math.floor(audio.currentTime/audio.duration*100);
+                var _progress = (audio.currentTime/audio.duration*100).toFixed(2);
+                //audio.autobuffer = ;
+                //S.log([_curTime, _countTime, _progress, audio.byteLength, audio.loadedmetadata, audio.autobuffer, audio]);
+                if(_curTime != curTime && _countTime != "NaN:NaN") {
                     curTime = _curTime;
                     countTime = audio.duration;
                     curProgress = _progress;
@@ -73,27 +70,32 @@ KISSY.add(function (S, Node) {
 
             },
             /**
-             * ²¥·Å½ø¶È
+             * æ’­æ”¾è¿›åº¦
              */
             _ended_handle: function() {
                 MusicPlayer.stop("ended");
             },
             /**
-             * ³õÊ¼»¯Èë¿Ú
-             * @param {Object} ÅäÖÃ²ÎÊý
+             * åˆå§‹åŒ–å…¥å£
+             * @param {Object} é…ç½®å‚æ•°
              */
             _init : function(config) {
                 MusicPlayer = this
                 S.mix(defaultConfig, config);
-                this._createAudio();
+                //this._createAudio();
                 this._bindEvent();
                 this._initAudio();
             },
             /**
-             * ³õÊ¼»¯ÒôÆµ
+             * åˆå§‹åŒ–éŸ³é¢‘
              */
             _initAudio : function() {
                 S.log(["audio", audio]);
+                audio.addEventListener("timeupdate", this._progress_handle, true);
+                audio.addEventListener("ended", this._ended_handle, true);
+                audio.addEventListener("loadedmetadata", function(_event) {
+                     //alert(audio.duration);
+                });
                 this.setList(defaultConfig.musicList);
 
                 if(defaultConfig.auto) {
@@ -101,13 +103,13 @@ KISSY.add(function (S, Node) {
                 }
             },
             /**
-             * ²¥·Å
-             * @param {int} ²¥·ÅË÷ÒýºÅ 0-(len-1)  Ä¬ÈÏ µ±Ç°
+             * æ’­æ”¾
+             * @param {int} æ’­æ”¾ç´¢å¼•å· 0-(len-1)  é»˜è®¤ å½“å‰
              */
             play : function(index) {
                 if(index == null) index = -1;
                 if(index > count) {
-                    sendError("²¥·ÅÒôÀÖµÄË÷Òý³¬³ö·¶Î§");
+                    sendError("æ’­æ”¾éŸ³ä¹çš„ç´¢å¼•è¶…å‡ºèŒƒå›´");
                     return;
                 }
                 if(index >= 0) curIndex = index;
@@ -129,7 +131,7 @@ KISSY.add(function (S, Node) {
                 isPlay = true;
                 isPause = false;
 
-                //µÚÒ»´Î×Ô¶¯²¥·Å,²»´¥·¢µÄBUG..×öÑÓÊ±
+                //ç¬¬ä¸€æ¬¡è‡ªåŠ¨æ’­æ”¾,ä¸è§¦å‘çš„BUG..åšå»¶æ—¶
                 if(index == "first_delay_sendstatus") {
                     setTimeout(function(){
                         sendStatus("play");
@@ -142,7 +144,7 @@ KISSY.add(function (S, Node) {
 
             },
             /**
-             * Í£Ö¹
+             * åœæ­¢
              */
             stop : function(ended) {
                 if(isPlay)
@@ -154,14 +156,14 @@ KISSY.add(function (S, Node) {
 
                 sendStatus("stop");
 
-                //Èç¹ûÊÇ×ÔÈ»²¥·Å½áÊø, ¸ù¾ÝÄ£Ê½, ÉèÖÃµ±Ç°²¥·Å×´Ì¬
+                //å¦‚æžœæ˜¯è‡ªç„¶æ’­æ”¾ç»“æŸ, æ ¹æ®æ¨¡å¼, è®¾ç½®å½“å‰æ’­æ”¾çŠ¶æ€
                 if(ended != null)
                 {
                     runMode();
                 }
             },
             /**
-             * ÔÝÍ£
+             * æš‚åœ
              */
             pause : function() {
                 if(isPlay)
@@ -173,7 +175,7 @@ KISSY.add(function (S, Node) {
                 }
             },
             /**
-             * ÉÏÒ»Ê×
+             * ä¸Šä¸€é¦–
              */
             pre : function() {
                 if(curIndex > 0)
@@ -184,7 +186,7 @@ KISSY.add(function (S, Node) {
                 this.play();
             },
             /**
-             * ÏÂÒ»Ê×
+             * ä¸‹ä¸€é¦–
              */
             next : function() {
                 if(curIndex < count)
@@ -195,12 +197,12 @@ KISSY.add(function (S, Node) {
                 this.play();
             },
             /**
-             * ÉèÖÃÁÐ±í ²Î¿¼ [{name:'name', path:'path'}]
+             * è®¾ç½®åˆ—è¡¨ å‚è€ƒ [{name:'name', path:'path'}]
              */
             setList : function(obj) {
                 mp3List = obj || {};
                 if(mp3List == null || mp3List.length <= 0) {
-                    sendError("Çë¼ì²é¸èÇúÁÐ±í, ²Î¿¼ [{name:'name', path:'path'}]");
+                    sendError("è¯·æ£€æŸ¥æ­Œæ›²åˆ—è¡¨, å‚è€ƒ [{name:'name', path:'path'}]");
                     return;
                 }
                 count = mp3List.length - 1;
@@ -222,7 +224,7 @@ KISSY.add(function (S, Node) {
     }
 
     function sendError(msg){
-        var _msg = msg || "´íÎóÒì³£!";
+        var _msg = msg || "é”™è¯¯å¼‚å¸¸!";
         var _type = 2000;
 
         var _obj = { "type":_type, "msg":_msg };
@@ -243,7 +245,7 @@ KISSY.add(function (S, Node) {
     }
 
     /**
-     *  ÒôÀÖ²¥·Å½áÊøÖ®ºó,¸ù¾Ý²¥·ÅÄ£Ê½¼ÌÐøÔËÐÐ
+     *  éŸ³ä¹æ’­æ”¾ç»“æŸä¹‹åŽ,æ ¹æ®æ’­æ”¾æ¨¡å¼ç»§ç»­è¿è¡Œ
      **/
     function runMode() {
         switch(mode) {
@@ -272,6 +274,11 @@ KISSY.add(function (S, Node) {
         }
     }
 
+    /**
+     * æŠŠç§’è½¬å˜æˆ 00:00 æ ¼å¼çš„æ—¶é—´
+     * @param time ç§’
+     * @returns {string}
+     */
     function formatTime(time) {
         var minutes = Math.floor(time/60);
         var seconds = Math.floor(time%60);
@@ -288,8 +295,17 @@ KISSY.add(function (S, Node) {
     return {
         init : function(_defaultConfig) {
             defaultConfig = _defaultConfig;
-            setObj();
+            setObj()
             return _obj;
+        },
+        /**
+         *  æ£€æµ‹æ˜¯å¦æ”¯æŒH5çš„audioæ ‡ç­¾
+         */
+        isSupportAudio : function() {
+            audio = document.createElement("audio");
+            audio.contentType = "Content-Type:application/octet-stream";
+            var _isSupport = !!(audio.canPlayType);
+            return _isSupport;
         }
     };
 }, {requires:['node']});

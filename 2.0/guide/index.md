@@ -1,8 +1,8 @@
 ## 综述
 
-musicPlayer是基于Flash开发的MP3音乐播放组件, 3分钟即可完成简单的音乐播放, 我们不需要关心FLASH内封装数据和控制, 只要专注于侦听数据改变我们的视图即可.
+musicPlayer是基于Flash和HTML5两个方案开发的MP3音乐播放组件, 3分钟即可完成简单的音乐播放, 我们不需要关心内部封装的数据和控制, 只要专注于侦听数据改变我们的视图即可.
 
-* 版本：1.0
+* 版本：2.0
 * 作者：doin
 * demo : [https://github.com/doin/musicPlayer](https://github.com/doin/musicPlayer)
 
@@ -24,6 +24,7 @@ musicPlayer是基于Flash开发的MP3音乐播放组件, 3分钟即可完成简�
 
 参数名|参数类型|默认|参数说明|描述
 ------------|------------|------------|-------------|-------------
+type     |      String    |     'auto'   |auto,flash,html5  |  设置使用的播和方式,如设置强制使用FLASH播放,默认先走HTML5可用性再走FLASH
 auto|Boolean|false|false:true|组件初始化完成是否自动播放, 默认需要点击播放按钮
 volume|Number|0.25|0-1之间|音量控制,后期可随时设置
 mode     |      String    |     'order'   |播放完直接停止(stop):单曲循环(single):随机播放(random):顺序播放(order)  |  设置自动播放完成后的模式
@@ -116,9 +117,9 @@ progress     |   获取当前歌曲播放进度,值为0-100
 
 ## demo演示
 
-* [简单的控制音乐播放](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo1.html)
-* [MP3列表模式实例](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo2.html)
-* [完整MP3播放器-演示所有功能](http://gallery.kissyui.com/musicPlayer/1.0/demo/demo3.html)
+* [简单的控制音乐播放](http://gallery.kissyui.com/musicPlayer/2.0/demo/demo1.html)
+* [MP3列表模式实例](http://gallery.kissyui.com/musicPlayer/2.0/demo/demo2.html)
+* [完整MP3播放器-演示所有功能](http://gallery.kissyui.com/musicPlayer/2.0/demo/demo3.html)
 
 ##Q&A
 
