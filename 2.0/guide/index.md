@@ -11,7 +11,7 @@ musicPlayer是基于Flash和HTML5两个方案开发的MP3音乐播放组件, 3�
 1分钟实现背景音乐循环播放
 引入KISSY1.3,复制嵌入代码,修改歌曲路径即可
 ```javascript
-    S.use('gallery/musicPlayer/1.0/index', function (S, MusicPlayer) {
+    S.use('gallery/musicPlayer/2.0/index', function (S, MusicPlayer) {
          var musicPlayer = new MusicPlayer({
                                            auto:'true', //自动播放 默认不播放.
                                            mode:'order', //如果几首歌想随机播放,设置为 random, 默认为order.
