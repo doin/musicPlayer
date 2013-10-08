@@ -36,7 +36,7 @@ KISSY.add(function (S, Node, SWF) {
              */
             _createSWF : function() {
                 swf = new SWF({
-                    src:'http://gtms02.alicdn.com/tps/i2/T1L9YeFe8bXXXtxVjX.swf',
+                    src:'http://gtms02.alicdn.com/tps/i2/T1iNTbFbddXXXtxVjX.swf',
                     attrs:{
                         width:1,
                         height:1
