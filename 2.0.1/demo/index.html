@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>musicPlayer的demo</title>
+    <script src="http://g.tbcdn.cn/kissy/k/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+</head>
+<style type="text/css">
+    body {
+        background-color: #2B2B2B;
+        color: #F0F0F0;
+        font-family: '微软雅黑';
+        padding: 0 50px;
+    }
+    a {
+        color: #F0F0F0;
+        font-family: '微软雅黑';
+        font-size: 20px;
+    }
+    a:hover {
+        color: #fff2f2;
+    }
+    ul {
+        display: inline-block;
+    }
+</style>
+
+<style>
+    .ks-overlay {
+        position:absolute;
+        left:-9999px;
+        top:-9999px;
+    }
+    .ks-overlay-hidden {
+        visibility: hidden;
+    }
+
+    .ks-overlay-mask-hidden {
+        display: none;
+    }
+
+    .ks-overlay-shown {
+        visibility: visible;
+    }
+
+    .ks-overlay-mask-shown{
+        display: block;
+    }
+</style>
+<body>
+<h1>demo汇总</h1>
+<ul>
+    <li rel="http://gtms04.alicdn.com/tps/i4/T1ESuNFipgXXbbjygo-287-150.jpg"><a href="http://gallery.kissyui.com/musicPlayer/2.0/demo/demo1.html">demo1点击进入 - 简单的控制音乐播放</a></li>
+    <li rel="http://gtms01.alicdn.com/tps/i1/T1IBW5Fk4aXXa7zVn3-378-206.jpg"><a href="http://gallery.kissyui.com/musicPlayer/2.0/demo/demo2.html">demo2点击进入 - MP3列表模式实例</a></li>
+    <li rel="http://gtms04.alicdn.com/tps/i4/T11Mq2FcJfXXaDVS78-449-385.jpg"><a href="http://gallery.kissyui.com/musicPlayer/2.0/demo/demo3.html">demo3点击进入  - 完整MP3播放器-演示所有功能</a></li>
+</ul>
+<script type="text/javascript">
+    var S = KISSY;
+
+    KISSY.use("node, overlay", function (S, Node, O) {
+        //新建共享popup层
+        var $ = Node.all,
+                popup = new O({
+                    effect:{
+                        effect:"fade", //popup层显示动画效果，slide是展开，也可以"fade"渐变
+                        duration:0.5
+                    }
+                });
+        // 注意：使用定制的显示/隐藏方式
+        $("ul").delegate("mouseenter", "a", function (e) {
+            var t = $(e.target);
+            console.log(t[0])
+            popup.set("content", '<img src="' + t.parent('li').attr('rel') + '"/>');
+            popup.set('align', {
+                node:t,
+                points:["tr", "tl"]
+            });
+            popup.show();
+        });
+
+        $("ul").delegate("mouseleave", "a", function (e) {
+            popup.hide();
+        });
+    });
+</script>
+</body>
+</html>
