@@ -45,6 +45,13 @@ mode     |     String     |     读/写      |播放完直接停止(stop):单曲
 buffer     |    int      |     读/写      |    默认1000毫秒   |    音乐播放缓冲区时间
 volume     |    Number    |     读/写      |    0-1之间   |    音量控制,后期可随时设置
 progress     |    int    |   只写      |    0-100之间   |   设置当前播放歌曲的进度
+```javascript
+    //获取参数
+    musicPlayer.get('mode');
+    //设置参数
+    musicPlayer.get('mode', 'single');
+```
+
 
 ## 方法说明
 
