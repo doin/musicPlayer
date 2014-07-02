@@ -10,6 +10,23 @@
 * [MP3列表模式实例](http://hansheng.demo.taobao.net/lab/musicplayer/2.0/demo2.html)
 * [完整MP3播放器-演示所有功能](http://hansheng.demo.taobao.net/lab/musicplayer/2.0/demo3.html)
 
+## FAQ
+1. DEMO无法播放    
+MP3地址失效,请通知到我修改MP3有效地址 / 自行下载DEMO代码修改MP3地址
+
+2. IOS设置 safari浏览器不能播放    
+html audio 在iPhone，ipd,safari浏览器不能播放原因
+(在safri on ios里面明确指出等待用户的交互动作后才能播放media，也就是说如果你没有得到用户的action就播放的话就会被safri拦截)
+
+3. 调试
+修改代码如下
+```javascript    
+var S = KISSY;
+S.Config.debug = true;  //加入如下行
+if (S.Config.debug) {
+var srcPath = "../../../";
+```    
+
 ## changelog
 
 ### V1.0
