@@ -128,9 +128,9 @@ progress     |   获取当前歌曲播放进度,值为0-100
 
 ## demo演示
 
-* [简单的控制音乐播放](http://gallery.kissyui.com/musicPlayer/2.0/demo/demo1.html)
-* [MP3列表模式实例](http://gallery.kissyui.com/musicPlayer/2.0/demo/demo2.html)
-* [完整MP3播放器-演示所有功能](http://gallery.kissyui.com/musicPlayer/2.0/demo/demo3.html)
+* [简单的控制音乐播放](http://hansheng.demo.taobao.net/lab/musicplayer/2.0/demo1.html)
+* [MP3列表模式实例](http://hansheng.demo.taobao.net/lab/musicplayer/2.0/demo2.html)
+* [完整MP3播放器-演示所有功能](http://hansheng.demo.taobao.net/lab/musicplayer/2.0/demo3.html)
 
 ##Q&A
 
