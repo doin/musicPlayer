@@ -7,8 +7,9 @@
     "author": {
         "name": "韩升",
         "email": "hansheng.sl@taobao.com",
-        "page": "https://github.com/doin/musicPlayer"
+//        "page": "https://github.com/doin"
     },
+    "githubName": "doin",
     "type": "kissy-gallery",
     "type-url": "http://gallery.kissyui.com/guide"
 }
