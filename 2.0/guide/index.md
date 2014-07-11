@@ -49,7 +49,7 @@ progress     |    int    |   只写      |    0-100之间   |   设置当前播�
     //获取参数
     musicPlayer.get('mode');
     //设置参数
-    musicPlayer.get('mode', 'single');
+    musicPlayer.set('mode', 'single');
 ```
 
 
