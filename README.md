@@ -6,9 +6,9 @@
 
 ## demo演示
 
-* [简单的控制音乐播放](http://gallery.kissyui.com/musicPlayer/2.0/guide/demo1.html)
-* [MP3列表模式实例](http://gallery.kissyui.com/musicPlayer/2.0/guide/demo2.html)
-* [完整MP3播放器-演示所有功能](http://gallery.kissyui.com/musicPlayer/2.0/guide/demo3.html)
+* [简单的控制音乐播放](http://kpm.taobao.net/musicPlayer/doc/demo/demo1.html)
+* [MP3列表模式实例](http://kpm.taobao.net/musicPlayer/doc/demo/demo2.html)
+* [完整MP3播放器-演示所有功能](http://kpm.taobao.net/musicPlayer/doc/demo/demo3.html)
 
 ## FAQ
 1. DEMO无法播放    
