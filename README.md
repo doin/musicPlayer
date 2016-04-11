@@ -2,7 +2,7 @@
 
 * 版本：2.0
 * 概述：musicPlayer是基于Flash和HTML5两个方案开发的MP3音乐播放组件, 3分钟即可完成简单的音乐播放, 我们不需要关心内部封装的数据和控制, 只要专注于侦听数据改变我们的视图即可.
-* 教程：[http://gallery.kissyui.com/musicPlayer/2.0/guide/index.html](http://gallery.kissyui.com/musicPlayer/2.0/guide/index.html)
+* 教程：[http://kpm.alibaba.net/musicPlayer/doc/guide/index.html](http://kpm.alibaba.net/musicPlayer/doc/guide/index.html)
 
 ## demo演示
 
