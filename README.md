@@ -6,9 +6,9 @@
 
 ## demo演示
 
-* [简单的控制音乐播放](http://kpm.taobao.net/musicPlayer/doc/demo/demo1.html)
-* [MP3列表模式实例](http://kpm.taobao.net/musicPlayer/doc/demo/demo2.html)
-* [完整MP3播放器-演示所有功能](http://kpm.taobao.net/musicPlayer/doc/demo/demo3.html)
+* [简单的控制音乐播放](http://nb.labs.taobao.net/demo/kpm/musicPlayer/demo1.html?account=hansheng.sl)
+* [MP3列表模式实例](http://nb.labs.taobao.net/demo/kpm/musicPlayer/demo2.html?account=hansheng.sl)
+* [完整MP3播放器-演示所有功能](http://nb.labs.taobao.net/demo/kpm/musicPlayer/demo3.html?account=hansheng.sl)
 
 ## FAQ
 1. DEMO无法播放    
